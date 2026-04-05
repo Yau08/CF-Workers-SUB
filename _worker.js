@@ -52,6 +52,7 @@ export default {
 
 				// 強力修復：定義你的專屬數字，不干擾原有的變數
 		const myTotalValue = 985583190532096; // 896.4 TB
+		const myUpload = 213568618496; // 198.9 GB 的 Byte 數值
 		const myExpireValue = 3768720000;    // 2089-06-04
 		const myUsedValue = Math.floor(myTotalValue * 0.1); // 已用 10%
 
@@ -189,7 +190,7 @@ export default {
 				"content-type": "text/plain; charset=utf-8",
 				"Profile-Update-Interval": `${SUBUpdateTime}`,
 				"Profile-web-page-url": request.url.includes('?') ? request.url.split('?')[0] : request.url,
-				"Subscription-Userinfo": `upload=0; download=${myUsedValue}; total=${myTotalValue}; expire=${myExpireValue}`,
+				"Subscription-Userinfo": `upload=${myUpload}; download=${myUsedValue}; total=${myTotalValue}; expire=${myExpireValue}`,
 			};
 
 			if (订阅格式 == 'base64' || token == fakeToken) {
