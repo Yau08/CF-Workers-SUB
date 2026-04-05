@@ -50,10 +50,14 @@ export default {
 		const 访客订阅 = guestToken;
 		//console.log(`${fakeUserID}\n${fakeHostName}`); // 打印fakeID
 
-		let total = 985583190532096; // 這是 896.4 TB 的 Byte 數值
-		let UD = Math.floor(total * 0.10); // 這代表進度條顯示「已用 5%」，剩下 95%
-		let expire = 3768720000; // 這是 2089-06-04 的時間戳
+				// 強力修復：定義你的專屬數字，不干擾原有的變數
+		const myTotalValue = 985583190532096; // 896.4 TB
+		const myExpireValue = 3768720000;    // 2089-06-04
+		const myUsedValue = Math.floor(myTotalValue * 0.1); // 已用 10%
+
+		// 原有的邏輯（這幾行通常是原代碼需要的，我們把它還原）
 		SUBUpdateTime = env.SUBUPTIME || SUBUpdateTime;
+
 
 		if (!([mytoken, fakeToken, 访客订阅].includes(token) || url.pathname == ("/" + mytoken) || url.pathname.includes("/" + mytoken + "?"))) {
 			if (TG == 1 && url.pathname !== "/" && url.pathname !== "/favicon.ico") await sendMessage(`#异常访问 ${FileName}`, request.headers.get('CF-Connecting-IP'), `UA: ${userAgent}</tg-spoiler>\n域名: ${url.hostname}\n<tg-spoiler>入口: ${url.pathname + url.search}</tg-spoiler>`);
@@ -185,7 +189,7 @@ export default {
 				"content-type": "text/plain; charset=utf-8",
 				"Profile-Update-Interval": `${SUBUpdateTime}`,
 				"Profile-web-page-url": request.url.includes('?') ? request.url.split('?')[0] : request.url,
-				//"Subscription-Userinfo": `upload=${UD}; download=${UD}; total=${total}; expire=${expire}`,
+				"Subscription-Userinfo": `upload=0; download=${myUsedValue}; total=${myTotalValue}; expire=${myExpireValue}`,
 			};
 
 			if (订阅格式 == 'base64' || token == fakeToken) {
